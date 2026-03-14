@@ -26,9 +26,11 @@ async function safeApiRequest<T>(
     const response = await request;
     return response?.data ?? fallback;
   } catch (error: any) {
-    console.error("API ERROR:", {
+    console.error("LIVE-API ERROR:", {
       message: error?.message,
       status: error?.response?.status,
+      url: error?.config?.url,
+      baseURL: error?.config?.baseURL,
       data: error?.response?.data,
     });
 

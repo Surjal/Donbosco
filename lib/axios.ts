@@ -3,7 +3,7 @@ import axios from "axios";
 axios.defaults.timeout = 30000;
 
 const api = axios.create({
-  baseURL: (process.env.NEXT_PUBLIC_API_URL || "https://dbs-website.ratoguras.com/api").replace(/\/$/, ""),
+  baseURL: (process.env.NEXT_PUBLIC_API_URL || "https://dbs-website.ratoguras.com/api").trim().replace(/\/$/, ""),
   timeout: 30000, // Increase timeout for production builds
   headers: {
     "Content-Type": "application/json",
