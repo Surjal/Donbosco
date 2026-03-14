@@ -60,14 +60,11 @@ function transformToOrgTeamMember(item: TeamApiItem): OrgTeamMember {
   };
 }
 
-/**
- * Fetch team members from API for a given organization
- */
 export async function fetchTeamsByOrgId(
   organizationId: number,
 ): Promise<TeamApiItem[]> {
   const endpoint = `/teams/${organizationId}`;
-  const fullUrl = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`;
+  const fullUrl = (process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "https://dbs-website.ratoguras.com/api") + endpoint;
 
   try {
     const response = await api.get<TeamApiResponse>(endpoint);

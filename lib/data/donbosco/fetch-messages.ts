@@ -50,11 +50,11 @@ export async function fetchMessages(
   schoolId: number = 1,
 ): Promise<Message[]> {
   const endpoint = `/messages/${schoolId}`;
-  const fullUrl = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`;
+  const fullUrl = (process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "https://dbs-website.ratoguras.com/api") + endpoint;
   try {
     const response = await api.get<MessageApiResponse>(endpoint);
     const msgs = response.data.data;
-    console.log(`[fetchMessages] ✅ Fetched ${msgs} messages from ${fullUrl}`);
+    console.log(`[fetchMessages] ✅ Fetched ${msgs?.length ?? 0} messages from ${fullUrl}`);
     return msgs?.map(transformToMessage) ?? [];
   } catch (error: any) {
     console.error(`[fetchMessages] ❌ Failed to fetch from ${fullUrl}`);

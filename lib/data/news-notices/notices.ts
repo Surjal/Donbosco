@@ -140,7 +140,8 @@ export const getNoticesPaginate = async (page: number) => {
 export async function fetchNoticesByOrgId(organizationId: number) {
   try {
     const url = `/notices/${organizationId}`;
-    console.log(`[fetchNoticesByOrgId] Fetching from: ${api.getUri() + url}`);
+    const fullUrl = (process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "https://dbs-website.ratoguras.com/api") + url;
+    console.log(`[fetchNoticesByOrgId] Fetching from: ${fullUrl}`);
 
     const response = await api.get<NoticeApiResponse>(url);
     return transformNoticeApiToNotice(response.data.data);

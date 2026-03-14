@@ -54,7 +54,7 @@ interface FaqApiResponse {
  */
 export async function fetchFaqs(organizationId: number = 1): Promise<Faq[]> {
   const endpoint = `/faqs/${organizationId}`;
-  const fullUrl = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`;
+  const fullUrl = (process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "https://dbs-website.ratoguras.com/api") + endpoint;
 
 
   try {
@@ -102,7 +102,7 @@ export async function fetchFaqsPaginated(
   perPage: number = 10,
 ): Promise<FaqApiResponse> {
   const endpoint = `/faqs/${organizationId}`;
-  const fullUrl = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}?page=${page}&per_page=${perPage}`;
+  const fullUrl = (process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "https://dbs-website.ratoguras.com/api") + endpoint + `?page=${page}&per_page=${perPage}`;
 
   try {
     const response = await api.get<FaqApiResponse>(endpoint, {

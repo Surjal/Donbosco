@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://dbs-website.ratoguras.com/api",
+  baseURL: (process.env.NEXT_PUBLIC_API_URL || "https://dbs-website.ratoguras.com/api").replace(/\/$/, ""),
   timeout: 10000, // prevent hanging requests
   headers: {
     "Content-Type": "application/json",

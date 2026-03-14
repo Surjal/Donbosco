@@ -55,7 +55,8 @@ async function safeApiRequest<T>(
 ): Promise<T> {
   try {
     const res = await request;
-    return res?.data ?? fallback;
+    // Handle both Axios responses (with .data) and direct data
+    return res && typeof res === 'object' && 'data' in res ? res.data : (res ?? fallback);
   } catch (error: any) {
     console.error("API ERROR:", {
       message: error?.message,
@@ -133,7 +134,7 @@ function transformToMessage(item: any): Message {
 
 export async function getMessages(): Promise<Message[]> {
   const msgs = await safeApiRequest<Message[]>(fetchMessages(), []);
-  return msgs.map(transformToMessage);
+  return msgs; // fetchMessages already transforms the data
 }
 
 export async function getMessageById(id: number): Promise<Message | undefined> {
