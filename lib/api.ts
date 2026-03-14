@@ -61,6 +61,7 @@ async function safeApiRequest<T>(
     console.error("API ERROR:", {
       message: error?.message,
       status: error?.response?.status,
+      url: error?.config?.url,
       data: error?.response?.data,
     });
     return fallback;
