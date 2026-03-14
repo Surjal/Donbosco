@@ -17,7 +17,7 @@ export function MessageSection({ messages }: Props) {
   return (
     <section
       id="message"
-      className="py-16 lg:py-28 bg-white relative overflow-hidden"
+      className="py-16 lg:py-28 bg-white relative overflow-hidden"  
     >
       <div className="absolute top-0 right-0 w-1/2 lg:w-1/3 h-full bg-gradient-to-l from-light-primary/40 to-transparent pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-48 h-48 lg:w-64 lg:h-64 bg-accent/5 rounded-full -translate-x-1/2 translate-y-1/2" />
